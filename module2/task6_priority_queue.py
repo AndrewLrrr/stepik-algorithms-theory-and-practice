@@ -21,9 +21,7 @@ Sample Output:
 """
 
 
-class PriorityQueue:
-    _h = []
-
+class PriorityQueue(list):
     @staticmethod
     def _parent(i):
         return (i + 1) // 2 - 1
@@ -38,9 +36,12 @@ class PriorityQueue:
 
     def _safe_value(self, i):
         try:
-            return self._h[i]
+            return self[i]
         except IndexError:
             return -float("inf")
+
+    def _swap(self, i, j):
+        self[i], self[j] = self[j], self[i]
 
     def _next(self, i):
         r_i = self._right_child(i)
@@ -48,29 +49,29 @@ class PriorityQueue:
         return r_i if self._safe_value(r_i) > self._safe_value(l_i) else l_i
 
     def _last_idx(self):
-        return len(self._h) - 1
+        return len(self) - 1
 
     def _sift_up(self, n, i):
-        p_i = self._parent(i)
-        if p_i >= 0 and self._h[p_i] < n:
-            self._h[i], self._h[p_i] = self._h[p_i], self._h[i]
-            self._sift_up(n, p_i)
+        j = self._parent(i)
+        if j >= 0 and self[j] < n:
+            self._swap(i, j)
+            self._sift_up(n, j)
 
     def _sift_down(self, n, i):
-        n_i = self._next(i)
-        if n_i <= self._last_idx() and self._h[n_i] > n:
-            self._h[i], self._h[n_i] = self._h[n_i], self._h[i]
-            self._sift_down(n, n_i)
+        j = self._next(i)
+        if j <= self._last_idx() and self[j] > n:
+            self._swap(i, j)
+            self._sift_down(n, j)
 
-    def insert(self, n):
-        self._h.append(n)
+    def append(self, n):
+        super().append(n)
         self._sift_up(n, self._last_idx())
 
     def extract_max(self):
-        self._h[0], self._h[self._last_idx()] = self._h[self._last_idx()], self._h[0]
-        _max = self._h.pop()
-        if len(self._h) > 0:
-            self._sift_down(self._h[0], 0)
+        self._swap(0, self._last_idx())
+        _max = self.pop()
+        if len(self) > 0:
+            self._sift_down(self[0], 0)
         return _max
 
 
@@ -81,7 +82,7 @@ def main():
         command = input()
         if command.startswith('Insert'):
             _, n = command.split()
-            pq.insert(int(n))
+            pq.append(int(n))
         elif command.startswith('ExtractMax'):
             print(pq.extract_max())
 
