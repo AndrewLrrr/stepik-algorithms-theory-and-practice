@@ -1,4 +1,5 @@
 import unittest
+
 from module2.task2_continuous_backpack import continuous_backpack
 
 

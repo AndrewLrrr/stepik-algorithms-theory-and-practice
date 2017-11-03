@@ -1,7 +1,8 @@
 import unittest
-from module2.task4_huffman_encoding import huffman
 from collections import Counter
 from collections import OrderedDict
+
+from module2.task4_huffman_encoding import huffman
 
 
 class TestHuffman(unittest.TestCase):

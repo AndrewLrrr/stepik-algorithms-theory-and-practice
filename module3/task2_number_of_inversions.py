@@ -24,26 +24,20 @@ def merge_sort_with_inversion(a):
     inversion = i_1 + i_2
 
     res = []
-    l_pointer = 0
-    r_pointer = 0
     while True:
-        if l_pointer < len(l) and r_pointer < len(r):
-            if l[l_pointer] <= r[r_pointer]:
-                v = l[l_pointer]
-                l_pointer += 1
+        if l and r:
+            if l[0] <= r[0]:
+                v = l.pop(0)
             else:
-                v = r[r_pointer]
-                r_pointer += 1
-                inversion += len(l) - l_pointer
-        elif l_pointer < len(l):
-            v = l[l_pointer]
-            l_pointer += 1
-        elif r_pointer < len(r):
-            v = r[r_pointer]
-            r_pointer += 1
-        else:
+                v = r.pop(0)
+                inversion += len(l)
+            res.append(v)
+        elif l:
+            res.extend(l)
             break
-        res.append(v)
+        elif r:
+            res.extend(r)
+            break
     return res, inversion
 
 

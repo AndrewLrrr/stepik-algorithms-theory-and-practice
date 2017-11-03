@@ -1,4 +1,5 @@
 import unittest
+
 from module2.task5_huffman_decoding import huffman_decode
 
 

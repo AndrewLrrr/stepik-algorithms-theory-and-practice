@@ -1,4 +1,5 @@
 import unittest
+
 from module2.task6_priority_queue import PriorityQueue
 
 

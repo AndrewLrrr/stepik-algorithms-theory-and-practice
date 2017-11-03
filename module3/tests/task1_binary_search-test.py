@@ -1,4 +1,5 @@
 import unittest
+
 from module3.task1_binary_search import binary_search
 
 

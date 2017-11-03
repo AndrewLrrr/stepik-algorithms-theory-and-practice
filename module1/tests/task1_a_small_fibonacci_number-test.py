@@ -1,4 +1,5 @@
 import unittest
+
 from module1.task1_a_small_fibonacci_number import fib
 
 
