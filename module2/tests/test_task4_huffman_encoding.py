@@ -11,7 +11,7 @@ class TestHuffman(unittest.TestCase):
         codes = {
             'a': '0',
         }
-        self.assertEquals(codes, huffman(self.str_to_ordered_letters(string)))
+        self.assertEqual(codes, huffman(self.str_to_ordered_letters(string)))
 
     def test2(self):
         string = 'abacabad'
@@ -21,7 +21,7 @@ class TestHuffman(unittest.TestCase):
             'c': '110',
             'd': '111'
         }
-        self.assertEquals(codes, huffman(self.str_to_ordered_letters(string)))
+        self.assertEqual(codes, huffman(self.str_to_ordered_letters(string)))
 
     def test3(self):
         string = 'acceptance'
@@ -33,7 +33,7 @@ class TestHuffman(unittest.TestCase):
             'p': '011',
             't': '110'
         }
-        self.assertEquals(codes, huffman(self.str_to_ordered_letters(string)))
+        self.assertEqual(codes, huffman(self.str_to_ordered_letters(string)))
 
     @staticmethod
     def str_to_ordered_letters(string):

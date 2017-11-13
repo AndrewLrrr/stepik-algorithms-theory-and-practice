@@ -10,7 +10,7 @@ class TestSegmentsCover(unittest.TestCase):
             (2, 5),
             (3, 6)
         ]
-        self.assertEquals([3], segments_cover(segments))
+        self.assertEqual([3], segments_cover(segments))
 
     def test2(self):
         segments = [
@@ -19,7 +19,7 @@ class TestSegmentsCover(unittest.TestCase):
             (2, 5),
             (5, 6)
         ]
-        self.assertEquals([3, 6], segments_cover(segments))
+        self.assertEqual([3, 6], segments_cover(segments))
 
     def test3(self):
         segments = [
@@ -28,13 +28,13 @@ class TestSegmentsCover(unittest.TestCase):
             (3, 4),
             (5, 6)
         ]
-        self.assertEquals([2, 4, 6, 8], segments_cover(segments))
+        self.assertEqual([2, 4, 6, 8], segments_cover(segments))
 
     def test4(self):
         segments = [
             (1, 1),
         ]
-        self.assertEquals([1], segments_cover(segments))
+        self.assertEqual([1], segments_cover(segments))
 
     def test5(self):
         segments = [
@@ -44,4 +44,4 @@ class TestSegmentsCover(unittest.TestCase):
             (5, 8),
             (1, 2),
         ]
-        self.assertEquals([2, 4, 8], segments_cover(segments))
+        self.assertEqual([2, 4, 8], segments_cover(segments))

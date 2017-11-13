@@ -11,7 +11,7 @@ class TestBinarySearch(unittest.TestCase):
         actual = []
         for needle in needles:
             actual.append(binary_search(needle, haystack))
-        self.assertEquals(actual, expected)
+        self.assertEqual(actual, expected)
 
     def test2(self):
         haystack = [1, 5, 8, 12, 13, 18, 20, 24, 30]
@@ -20,7 +20,7 @@ class TestBinarySearch(unittest.TestCase):
         actual = []
         for needle in needles:
             actual.append(binary_search(needle, haystack))
-        self.assertEquals(actual, expected)
+        self.assertEqual(actual, expected)
 
     def test3(self):
         haystack = [1, 5, 8, 12, 13, 18, 20, 24, 30, 45, 100, 150, 1000, 2000]
@@ -29,7 +29,7 @@ class TestBinarySearch(unittest.TestCase):
         actual = []
         for needle in needles:
             actual.append(binary_search(needle, haystack))
-        self.assertEquals(actual, expected)
+        self.assertEqual(actual, expected)
 
     def test4(self):
         self.assertEqual(-1, binary_search(8, []))

@@ -8,7 +8,7 @@ class TestHuffmanDecode(unittest.TestCase):
         codes = {
             '0': 'a',
         }
-        self.assertEquals('a', huffman_decode('0', codes))
+        self.assertEqual('a', huffman_decode('0', codes))
 
     def test2(self):
         codes = {
@@ -17,7 +17,7 @@ class TestHuffmanDecode(unittest.TestCase):
             '110': 'c',
             '111': 'd',
         }
-        self.assertEquals('abacabad', huffman_decode('01001100100111', codes))
+        self.assertEqual('abacabad', huffman_decode('01001100100111', codes))
 
     def test3(self):
         codes = {
@@ -31,5 +31,5 @@ class TestHuffmanDecode(unittest.TestCase):
             '1111': 't',
             '010': 'u',
         }
-        self.assertEquals('acquisition', huffman_decode('1110001110001010000101111100111101', codes))
+        self.assertEqual('acquisition', huffman_decode('1110001110001010000101111100111101', codes))
 
