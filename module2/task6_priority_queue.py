@@ -22,17 +22,16 @@ Sample Output:
 
 
 class PriorityQueue(list):
-    @staticmethod
-    def _parent(i):
-        return (i + 1) // 2 - 1
+    def append(self, n):
+        super().append(n)
+        self._sift_up(n, self._last_idx())
 
-    @staticmethod
-    def _right_child(i):
-        return (i + 1) * 2
-
-    @staticmethod
-    def _left_child(i):
-        return (i + 1) * 2 - 1
+    def extract_max(self):
+        self._swap(0, self._last_idx())
+        _max = self.pop()
+        if len(self) > 0:
+            self._sift_down(self[0], 0)
+        return _max
 
     def _safe_value(self, i):
         try:
@@ -63,16 +62,17 @@ class PriorityQueue(list):
             self._swap(i, j)
             self._sift_down(n, j)
 
-    def append(self, n):
-        super().append(n)
-        self._sift_up(n, self._last_idx())
+    @staticmethod
+    def _parent(i):
+        return (i + 1) // 2 - 1
 
-    def extract_max(self):
-        self._swap(0, self._last_idx())
-        _max = self.pop()
-        if len(self) > 0:
-            self._sift_down(self[0], 0)
-        return _max
+    @staticmethod
+    def _right_child(i):
+        return (i + 1) * 2
+
+    @staticmethod
+    def _left_child(i):
+        return (i + 1) * 2 - 1
 
 
 def main():
