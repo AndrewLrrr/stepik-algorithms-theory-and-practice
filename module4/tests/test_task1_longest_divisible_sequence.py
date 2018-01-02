@@ -1,6 +1,6 @@
 import unittest
 
-from module4.longest_divisible_sequence import LDS
+from module4.task1_longest_divisible_sequence import LDS
 
 
 class TestLDS(unittest.TestCase):
