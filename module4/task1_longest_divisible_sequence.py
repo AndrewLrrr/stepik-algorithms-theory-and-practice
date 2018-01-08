@@ -12,7 +12,7 @@ Sample Output:
 """
 
 
-def LDS(A):
+def max_LDS(A):
     D = [1] * len(A)
     for i in range(len(A)):
         for j in range(i):
@@ -24,4 +24,4 @@ def LDS(A):
 if __name__ == '__main__':
     _ = input()
     s = [int(i) for i in input().split()]
-    print(LDS(s))
+    print(max_LDS(s))
