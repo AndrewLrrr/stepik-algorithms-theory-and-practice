@@ -1,5 +1,6 @@
 import random
 import time
+
 from module4.task2_longest_not_increase_sequence import LNIS
 
 
