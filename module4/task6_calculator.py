@@ -22,64 +22,35 @@ Sample Output 3:
 1 3 9 10 11 22 66 198 594 1782 5346 16038 16039 32078 96234 
 """
 
-# 6 ->  6 - 1, 6 / 2, 6 / 3 -> 5, 3, 3
-# 5 -> 5 - 1, 5 / 2, 5 / 3 -> 4
-# 3 -> 3 - 1, 3 / 2, 3 / 3 -> 2, 1!
-# 2 -> 2 - 1, 2 / 2, 2 / 3 -> 1, 1!
-
-# 7
-# 0 -> (7 - 1) | (7 / 2) | (7 / 3) -> 6
-# 1 -> (6 - 1) | (6 / 2) | (6 / 3) -> 5, 3, 2
-# 2 -> (5 - 1) | (5 / 2) | (5 / 3) | (3 - 1) | (3 / 2) | (3 / 3) | (2 - 1) | (2 / 2) | (2 / 3)
-# 3 -> 6 | 2 1 | 1 1
-# res = 1 3 6 7 | 1 2 6 7
-
-# 10 -> 1, 3, 9, 10
-# 0 -> (10 - 1) | (10 / 2) | (10 / 3) -> 9 5
-# 1 -> (9 - 1) | (9 / 2) | (9 / 3) -> 8, 3 | (5 - 1) | (5 / 2) | (5 / 3) -> 4
-# 2 -> (8 - 1) | (8 / 2) | (8 / 3) -> 7, 4 | (3 - 1) | (3 / 2) | (3 / 3) -> 2, 1 | (4 - 1) | (4 / 2) | (4 / 3) | 3, 2
-# 3 -> 6 | 2 1 | 1 1
-#        10
-#        |  \
-#        5   9 ----- 3 - 1
-#         \   \      |
-#          4   8     2
-#          |   |     |\
-#          2   4     1 1
-#          |\
-#          1 1
-import sys
-
-sys.setrecursionlimit(20000)
+# 1 -> {2, 3} # s = 1
+# 2 -> 3, 4, 6 # s = 1, 2 | 3 -> 4, 6, 9 | s = 1, 3
+# 3 -> 4, 6, 9, # (1, 2, 3,) | 5, 8, 12 # (1, 2, 4,) | 7, 12, 18 # (1, 2, 6,) \
+#      5, 8, 12 # (1, 3, 4,) | 7, 12, 18 # (1, 3, 6,) | 10, 18, 27 # (1, 3, 9,)
 
 
 def calculator(num):
     mem = dict()
+    sequences = {(1,)}
+    while num > 1:
+        tmp = set()
+        while len(sequences) > 0:
+            seq = sequences.pop()
+            n = seq[-1]
+            if n not in mem:
+                r = {n * 3, n * 2, n + 1}
+                mem[n] = r
+            else:
+                r = mem[n]
+            for j in r:
+                new_seq = seq + (j,)
+                if j == num:
+                    return new_seq
+                tmp.add(seq + (j,))
+        sequences = tmp
+    return sequences.pop()
 
-    def path_crawler(n):
-        if n == 1:
-            return tuple()
-        if n in mem:
-            return mem[n]
-        else:
-            a = n // 3 if n % 3 == 0 else None
-            b = n // 2 if n % 2 == 0 else None
-            c = n - 1
-            res = []
-            if a:
-                r = path_crawler(a)
-                r += (a,)
-                res.append(r)
-            if b:
-                r = path_crawler(b)
-                r += (b,)
-                res.append(r)
-            r = path_crawler(c)
-            r += (c,)
-            res.append(r)
-            res = sorted(res, key=lambda x: len(x))[0]
-            mem[n] = res
-            return res
-    path = path_crawler(num) + (num,)
 
-    return path
+if __name__ == '__main__':
+    res = calculator(int(input()))
+    print(len(res) - 1)
+    print(*res)

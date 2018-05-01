@@ -18,10 +18,10 @@ class TestKnapsack(unittest.TestCase):
 
     def test5(self):
         self.assertEqual((1,
-                          3,
-                          9,
-                          10,
-                          11,
+                          2,
+                          6,
+                          7,
+                          21,
                           22,
                           66,
                           198,
