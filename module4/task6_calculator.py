@@ -22,29 +22,22 @@ Sample Output 3:
 1 3 9 10 11 22 66 198 594 1782 5346 16038 16039 32078 96234 
 """
 
-# 1 -> {2, 3} # s = 1
-# 2 -> 3, 4, 6 # s = 1, 2 | 3 -> 4, 6, 9 | s = 1, 3
-# 3 -> 4, 6, 9, # (1, 2, 3,) | 5, 8, 12 # (1, 2, 4,) | 7, 12, 18 # (1, 2, 6,) \
-#      5, 8, 12 # (1, 3, 4,) | 7, 12, 18 # (1, 3, 6,) | 10, 18, 27 # (1, 3, 9,)
-
 
 def calculator(num):
-    mem = dict()
-    sequences = {(1,)}
+    sequences = {(num,)}
     while num > 1:
         tmp = set()
         while len(sequences) > 0:
             seq = sequences.pop()
             n = seq[-1]
-            if n not in mem:
-                r = {n * 3, n * 2, n + 1}
-                mem[n] = r
-            else:
-                r = mem[n]
+            a = n // 3 if n % 3 == 0 else None
+            b = n // 2 if n % 2 == 0 else None
+            c = n - 1
+            r = set(filter(None, (a, b, c)))
             for j in r:
                 new_seq = seq + (j,)
-                if j == num:
-                    return new_seq
+                if j == 1:
+                    return tuple(reversed(new_seq))
                 tmp.add(seq + (j,))
         sequences = tmp
     return sequences.pop()
