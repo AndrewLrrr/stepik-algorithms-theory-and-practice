@@ -15,7 +15,37 @@ Sample Output:
 1 0 0
 """
 
-import bisect
+
+def bisect_left(a, n):
+    l = 0
+    r = len(a) - 1
+    while l <= r:
+        idx = (l + r) // 2
+        v = a[idx]
+        if n > v:
+            l = idx + 1
+        else:
+            r = idx - 1
+    return l
+
+
+def bisect_right(a, n):
+    l = 0
+    r = len(a) - 1
+    while l <= r:
+        idx = (l + r) // 2
+        v = a[idx]
+        if n < v:
+            r = idx - 1
+        else:
+            l = idx + 1
+    return l
+
+
+def insort(a, n):
+    low = bisect_right(a, n)
+    a.insert(low, n)
+    return a
 
 
 class SegmentsManager:
@@ -25,25 +55,13 @@ class SegmentsManager:
 
     def add(self, segment):
         start, finish = segment
-        self._add_open_point(start)
-        self._add_end_point(finish)
+        insort(self._opening, start)
+        insort(self._ending, finish)
 
     def find(self, point):
-        i1 = self._find_open_point(point)
-        i2 = self._find_end_point(point)
+        i1 = bisect_right(self._opening, point)
+        i2 = bisect_left(self._ending, point)
         return i1 - i2
-
-    def _add_open_point(self, point):
-        bisect.insort(self._opening, point)
-
-    def _add_end_point(self, point):
-        bisect.insort_left(self._ending, point)
-
-    def _find_open_point(self, point):
-        return bisect.bisect(self._opening, point)
-
-    def _find_end_point(self, point):
-        return bisect.bisect_left(self._ending, point)
 
 
 if __name__ == '__main__':
